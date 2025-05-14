@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProyectoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // $proyectos = Proyecto::all();
@@ -21,51 +19,70 @@ class ProyectoController extends Controller
         return view('proyectos.index', compact('proyectos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        $usuarios = Usuario::all();
+        return view('proyectos.create', compact('usuarios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        // Obtener el usuario logueado
+        $usuario = Auth::user();
+
+        // Crear el proyecto
+        $proyecto = new Proyecto();
+        $proyecto->nombre_p = $request->input('nombre_p');
+        $proyecto->descripcion = $request->input('descripcion');
+        $proyecto->fecha_inicio = $request->input('fecha_inicio');
+        $proyecto->fecha_fin = $request->input('fecha_fin');
+        $proyecto->save();
+
+        // Asignar al usuario actual como administrador (rol_id = 1)
+        $proyecto->usuarios()->attach($usuario->usuario_id, ['rol_id' => 1]);
+
+        // Agregar colaboradores si existen (rol_id = 2)
+        if ($request->has('colaboradores')) {
+            foreach ($request->input('colaboradores') as $colaborador_id) {
+                $proyecto->usuarios()->attach($colaborador_id, ['rol_id' => 2]);
+            }
+        }
+
+        return redirect()->route('proyecto.index')->with('success', 'Proyecto creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Proyecto $proyecto)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Proyecto $proyecto)
     {
-        //
+        $usuarios = Usuario::all();
+        return view('proyectos.edit', compact('proyecto', 'usuarios'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Proyecto $proyecto)
     {
-        //
+        $proyecto->nombre_p = $request->input('nombre_p');
+        $proyecto->descripcion = $request->input('descripcion');
+        $proyecto->fecha_inicio = $request->input('fecha_inicio');
+        $proyecto->fecha_fin = $request->input('fecha_fin');
+        $proyecto->save();
+
+        return redirect()->route('proyecto.index')->with('success', 'Proyecto actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Proyecto $proyecto)
     {
-        //
+        $proyecto->usuarios()->detach();
+        $proyecto->delete();
+        return redirect()->route('proyecto.index')->with('success', 'Proyecto eliminado exitosamente.');
     }
 }

@@ -21,3 +21,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::resource('proyecto', ProyectoController::class);
+Route::delete('proyecto/{proyecto}', [ProyectoController::class, 'destroy'])->name('proyecto.destroy');
