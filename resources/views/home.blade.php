@@ -5,4 +5,5 @@
 @endsection
 
 @section('content')
-
+    {{ $user->nombre_u }}
+@endsection

@@ -4,12 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function showLogin()
+    {
+        // $usuario = new Usuario();
+        // $usuario->nombre_u = 'usuario1';
+        // $usuario->contrasena_u = \bcrypt('user1');
+        // $usuario->save();n
+
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $nombre_u = $request->input('nombre_u');
+        $contrasena_u = $request->input('contrasena_u');
+
+        $user = Usuario::where('nombre_u', $nombre_u)->first();
+
+        if ($user != null && Hash::check($contrasena_u, $user->contrasena_u)) {
+            Auth::login($user);
+            $response = redirect('/home');
+        } else {
+            $request->session()->flash('error', 'Usuario o contraseña incorrectos');
+            $response = redirect('/login')->withInput();
+        }
+        return $response;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
     public function index()
     {
         //

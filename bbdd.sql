@@ -4,7 +4,7 @@ USE gestion_proyectos;
 CREATE TABLE IF NOT EXISTS usuarios (
 	usuario_id int auto_increment primary key,
     nombre_u varchar(100) not null unique,
-    contraseña_u varchar(100) not null
+    contrasena_u varchar(100) not null
 );
 
 CREATE TABLE IF NOT EXISTS proyectos (

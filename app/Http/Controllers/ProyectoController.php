@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProyectoController extends Controller
 {
@@ -12,7 +13,12 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        //
+        // $proyectos = Proyecto::all();
+        // return view('proyectos.index', compact('proyectos'));
+
+        $usuario = Auth::user();
+        $proyectos = $usuario->proyectos;
+        return view('proyectos.index', compact('proyectos'));
     }
 
     /**
