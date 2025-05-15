@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tareas = Tarea::all();
+        return view('tareas.index', compact('tareas'));
     }
 
     /**

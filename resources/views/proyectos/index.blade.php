@@ -66,7 +66,7 @@
                         @endif
 
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary">
+                            <a href="{{ url('tarea') }}" class="btn btn-sm btn-primary">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </td>
