@@ -14,7 +14,7 @@ class UsuarioController extends Controller
         // $usuario = new Usuario();
         // $usuario->nombre_u = 'usuario1';
         // $usuario->contrasena_u = \bcrypt('user1');
-        // $usuario->save();n
+        // $usuario->save();
 
         return view('auth.login');
     }
