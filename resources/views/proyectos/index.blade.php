@@ -27,7 +27,7 @@
                     <th scope="col">Fecha Fin</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
-                    {{-- <th scope="col">Ver Tareas</th> --}}
+                    <th scope="col">Ver Tareas</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,23 +39,37 @@
                         <td>{{ \Carbon\Carbon::parse($proyecto->fecha_inicio)->format('d-m-Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($proyecto->fecha_fin)->format('d-m-Y') }}</td>
 
+                        @if ($proyecto->pivot->rol_id === 1)
+                            <td>
+                                <a href="{{ route('proyecto.edit', $proyecto->proyecto_id) }}"
+                                    class="btn btn-sm btn-primary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+
+                            <td>
+                                <form action="{{ route('proyecto.destroy', $proyecto->proyecto_id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @else
+                            <td>
+                                <label>No permitido</label>
+                            </td>
+                            <td>
+                                <label>No permitido</label>
+                            </td>
+                        @endif
+
                         <td>
-                            <a href="{{ route('proyecto.edit', $proyecto->proyecto_id) }}" class="btn btn-sm btn-primary">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                            <a href="#" class="btn btn-sm btn-primary">
+                                <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </td>
-
-                        <td>
-                            <form action="{{ route('proyecto.destroy', $proyecto->proyecto_id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-
-                        {{-- <td><i class="fa-solid fa-arrow-right"></i></td> --}}
                     </tr>
                 @endforeach
             </tbody>
