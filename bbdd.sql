@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS gestion_proyectos;
-USE gestion_proyectos;
+CREATE DATABASE IF NOT EXISTS gestion_proyectos2;
+USE gestion_proyectos2;
 
 CREATE TABLE IF NOT EXISTS usuarios (
 	usuario_id int auto_increment primary key,
