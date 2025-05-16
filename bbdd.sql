@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS tareas (
     proyecto_id int not null,
     usuario_id int not null,
     titulo varchar(100) not null,
-    estado_id int not null,
+    estado_id int not null default 1,
     prioridad_id int not null,
     tipo_id int not null,
     FechaCreacion timestamp default current_timestamp,
