@@ -8,16 +8,12 @@
         @yield('title')
     </title>
     @vite(['resources/css/app.css', 'resources/css/app.scss', 'resources/js/app.js'])
-
-    <!-- Agrega esto en el <head> -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="{{ '/' }}">Gestor de Proyectos</a>
+            <a class="navbar-brand" href="{{ url('/') }}">Gestor de Proyectos</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if (Auth::check())

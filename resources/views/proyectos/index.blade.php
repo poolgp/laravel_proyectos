@@ -66,7 +66,8 @@
                         @endif
 
                         <td>
-                            <a href="{{ url('tarea') }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('tarea.index', ['proyecto' => $proyecto->proyecto_id]) }}"
+                                class="btn btn-sm btn-primary">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </td>

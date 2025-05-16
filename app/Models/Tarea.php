@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tipo;
 use App\Models\Estado;
 use App\Models\Usuario;
 use App\Models\Proyecto;
@@ -36,5 +37,10 @@ class Tarea extends Model
     public function prioridad()
     {
         return $this->belongsTo(Prioridad::class, 'prioridad_id');
+    }
+
+    public function tipo()
+    {
+        return $this->belongsTo(Tipo::class, 'tipo_id');
     }
 }

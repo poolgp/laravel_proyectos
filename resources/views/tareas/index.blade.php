@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2><i class="fas fa-folder-open"></i> Gestión de Tareas: Proyecto 1</h2>
 
-            <a href="#" class="btn btn-success">
+            <a href="{{ route('tarea.create', ['proyectoId' => $proyectoId]) }}" class="btn btn-success">
                 Crear Tarea
             </a>
         </div>
@@ -21,8 +21,13 @@
                     <h3 class="fw-bold text-center">PENDIENTE</h3>
                     <hr class="bg-light border-2 border-top border-white opacity-50 my-3">
                     <div class="tareas-pendientes">
-                        <p>Tarea 1</p>
-                        <p>Tarea 2</p>
+                        @foreach ($tareas as $tarea)
+                            @if ($tarea['estado_id'] === 1)
+                                <div class="card" >
+                                    {{ $tarea['titulo'] }}
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -33,8 +38,13 @@
                     <h3 class="fw-bold text-center">EN PROCESO</h3>
                     <hr class="bg-light border-2 border-top border-white opacity-50 my-3">
                     <div class="tareas-proceso">
-                        <p>Tarea A</p>
-                        <p>Tarea B</p>
+                        @foreach ($tareas as $tarea)
+                            @if ($tarea['estado_id'] === 2)
+                                <div class="card">
+                                    {{ $tarea['titulo'] }}
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -45,8 +55,13 @@
                     <h3 class="fw-bold text-center">FINALIZADO</h3>
                     <hr class="bg-light border-2 border-top border-white opacity-50 my-3">
                     <div class="tareas-finalizadas">
-                        <p>Tarea X</p>
-                        <p>Tarea Y</p>
+                        @foreach ($tareas as $tarea)
+                            @if ($tarea['estado_id'] === 3)
+                                <div class="card">
+                                    {{ $tarea['titulo'] }}
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
