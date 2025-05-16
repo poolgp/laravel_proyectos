@@ -23,7 +23,7 @@
                     <div class="tareas-pendientes">
                         @foreach ($tareas as $tarea)
                             @if ($tarea['estado_id'] === 1)
-                                <div class="card" >
+                                <div class="card">
                                     {{ $tarea['titulo'] }}
                                 </div>
                             @endif
@@ -40,9 +40,7 @@
                     <div class="tareas-proceso">
                         @foreach ($tareas as $tarea)
                             @if ($tarea['estado_id'] === 2)
-                                <div class="card">
-                                    {{ $tarea['titulo'] }}
-                                </div>
+                                {{ $tarea['titulo'] }}
                             @endif
                         @endforeach
                     </div>
@@ -57,9 +55,7 @@
                     <div class="tareas-finalizadas">
                         @foreach ($tareas as $tarea)
                             @if ($tarea['estado_id'] === 3)
-                                <div class="card">
-                                    {{ $tarea['titulo'] }}
-                                </div>
+                                {{ $tarea['titulo'] }}
                             @endif
                         @endforeach
                     </div>
